@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundraising University - PhD-Level Fundraising Education</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="fu-app">
+    <header class="fu-header">
+      <div class="fu-logo">
+        <span class="fu-logo-text">Fundraising University</span>
+      </div>
+      <nav class="fu-nav">
+        <ul>
+          <li><a href="#dashboard" class="active" data-page="dashboard-page">Dashboard</a></li>
+          <li><a href="#curriculum" data-page="curriculum-page">Curriculum</a></li>
+          <li><a href="#study" data-page="study-page">Study</a></li>
+          <li><a href="#assessments" data-page="assessments-page">Assessments</a></li>
+          <li><a href="#resources" data-page="resources-page">Resources</a></li>
+        </ul>
+      </nav>
+      <div class="fu-user-menu">
+        <span class="fu-username" id="username">Student Name</span>
+        <div class="fu-avatar"></div>
+      </div>
+    </header>
+    
+    <main class="fu-main">
+      <!-- Dashboard Page -->
+      <div class="fu-page active" id="dashboard-page">
+        <div class="fu-progress-dashboard">
+          <div class="fu-dashboard-header">
+            <h2>Your Fundraising PhD Progress</h2>
+            <div class="fu-overall-progress">
+              <div class="fu-progress-stat">
+                <div class="fu-stat-label">Overall Completion</div>
+                <div class="fu-stat-value" id="overallCompletion">37%</div>
+                <div class="fu-progress-bar">
+                  <div class="fu-progress-fill" id="overallProgressFill" style="width: 37%"></div>
+                </div>
+              </div>
+              <div class="fu-progress-stat">
+                <div class="fu-stat-label">Current Module</div>
+                <div class="fu-stat-value" id="currentModule">Module 2</div>
+              </div>
+              <div class="fu-progress-stat">
+                <div class="fu-stat-label">Study Streak</div>
+                <div class="fu-stat-value" id="studyStreak">7 days</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="fu-module-progress-grid">
+            <!-- Module progress cards will be generated here -->
+          </div>
+          
+          <div class="fu-recent-activity">
+            <h3>Recent Activity</h3>
+            <div class="fu-activity-list" id="activityList">
+              <!-- Activity items will be generated here -->
+            </div>
+          </div>
+          
+          <div class="fu-certification-progress">
+            <h3>Certification Progress</h3>
+            <div class="fu-cert-requirements" id="certificationRequirements">
+              <!-- Certification requirements generated here -->
+            </div>
+            
+            <button class="fu-btn fu-btn-primary" id="viewCertificationDetails">View Certification Details</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Curriculum Page -->
+      <div class="fu-page" id="curriculum-page">
+        <div class="fu-page-header">
+          <h1>Complete Curriculum</h1>
+          <p>Comprehensive PhD-level fundraising education</p>
+        </div>
+        
+        <div class="fu-curriculum-container">
+          <div class="fu-module-tabs" id="moduleTabs">
+            <!-- Module tabs will be generated here -->
+          </div>
+          
+          <div class="fu-module-content" id="moduleContent">
+            <!-- Active module content will be displayed here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Study Page -->
+      <div class="fu-page" id="study-page">
+        <div class="fu-page-header">
+          <h1>Study Center</h1>
+          <p>Active learning tools to master fundraising concepts</p>
+        </div>
+        
+        <div class="fu-study-options">
+          <div class="fu-option-card" id="flashcardOption">
+            <div class="fu-option-icon">🔄</div>
+            <h3>Flashcards</h3>
+            <p>Master concepts through active recall and spaced repetition</p>
+            <button class="fu-btn fu-btn-primary">Start Flashcards</button>
+          </div>
+          
+          <div class="fu-option-card" id="notesOption">
+            <div class="fu-option-icon">📝</div>
+            <h3>Notes</h3>
+            <p>Review and add to your personal notes</p>
+            <button class="fu-btn fu-btn-primary">Open Notes</button>
+          </div>
+          
+          <div class="fu-option-card" id="practiceOption">
+            <div class="fu-option-icon">📚</div>
+            <h3>Practice Questions</h3>
+            <p>Test your knowledge with practice questions</p>
+            <button class="fu-btn fu-btn-primary">Start Practice</button>
+          </div>
+        </div>
+        
+        <div class="fu-flashcard-system" style="display: none;">
+          <div class="fu-study-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" id="backToStudyBtn">← Back to Study Options</button>
+            <h2>Flashcard Study</h2>
+          </div>
+          
+          <div class="fu-module-selector">
+            <label for="flashcardModule">Select Module:</label>
+            <select id="flashcardModule" class="fu-select">
+              <!-- Module options will be generated here -->
+            </select>
+          </div>
+          
+          <div class="fu-flashcard-header">
+            <h3 class="fu-module-title" id="flashcardTitle">Module 1: Fundraising Fundamentals</h3>
+            <div class="fu-card-progress">Card <span id="currentCardNum">1</span> of <span id="totalCards">10</span></div>
+          </div>
+          
+          <div class="fu-flashcard" id="flashcard">
+            <div class="fu-card-front">
+              <h4>Question:</h4>
+              <p id="card-question"></p>
+            </div>
+            <div class="fu-card-back">
+              <h4>Answer:</h4>
+              <p id="card-answer"></p>
+              <div class="fu-card-explanation">
+                <h5>Explanation:</h5>
+                <p id="card-explanation"></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="fu-card-controls">
+            <button class="fu-btn fu-btn-secondary" id="prev-card">Previous</button>
+            <button class="fu-btn fu-btn-primary" id="flip-card">Flip Card</button>
+            <button class="fu-btn fu-btn-secondary" id="next-card">Next</button>
+          </div>
+          
+          <div class="fu-rating-controls">
+            <p>How well did you know this?</p>
+            <div class="fu-rating-buttons">
+              <button class="fu-rating-btn" data-rating="1">1 - Not at all</button>
+              <button class="fu-rating-btn" data-rating="2">2 - Barely</button>
+              <button class="fu-rating-btn" data-rating="3">3 - Somewhat</button>
+              <button class="fu-rating-btn" data-rating="4">4 - Mostly</button>
+              <button class="fu-rating-btn" data-rating="5">5 - Perfectly</button>
+            </div>
+          </div>
+          
+          <div class="fu-flashcard-stats">
+            <div class="fu-stat-item">
+              <div class="fu-stat-label">Cards Studied</div>
+              <div class="fu-stat-value" id="cardsStudied">0</div>
+            </div>
+            <div class="fu-stat-item">
+              <div class="fu-stat-label">Average Rating</div>
+              <div class="fu-stat-value" id="averageRating">0</div>
+            </div>
+            <div class="fu-stat-item">
+              <div class="fu-stat-label">Time Spent</div>
+              <div class="fu-stat-value" id="timeSpent">0:00</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Notes System -->
+        <div class="fu-notes-system" style="display: none;">
+          <div class="fu-study-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" id="backToStudyFromNotes">← Back to Study Options</button>
+            <h2>Personal Notes</h2>
+          </div>
+          
+          <div class="fu-module-selector">
+            <label for="notesModule">Select Module:</label>
+            <select id="notesModule" class="fu-select">
+              <!-- Module options will be generated here -->
+            </select>
+          </div>
+          
+          <div class="fu-notes-editor">
+            <h3 id="notesTitle">Module 1: Fundraising Fundamentals</h3>
+            <textarea id="notesContent" class="fu-notes-textarea" placeholder="Enter your notes here..."></textarea>
+            <div class="fu-notes-controls">
+              <button class="fu-btn fu-btn-primary" id="saveNotes">Save Notes</button>
+              <button class="fu-btn fu-btn-secondary" id="resetNotes">Reset</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Practice Questions System -->
+        <div class="fu-practice-system" style="display: none;">
+          <div class="fu-study-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" id="backToStudyFromPractice">← Back to Study Options</button>
+            <h2>Practice Questions</h2>
+          </div>
+          
+          <div class="fu-module-selector">
+            <label for="practiceModule">Select Module:</label>
+            <select id="practiceModule" class="fu-select">
+              <!-- Module options will be generated here -->
+            </select>
+            <button class="fu-btn fu-btn-primary" id="startPractice">Start Practice</button>
+          </div>
+          
+          <div class="fu-practice-container" id="practiceContainer" style="display: none;">
+            <div class="fu-practice-question">
+              <h3 id="practiceQuestionTitle">Question 1 of 5</h3>
+              <p id="practiceQuestionText"></p>
+              <div class="fu-options-list" id="practiceOptionsList">
+                <!-- Practice options will be generated here -->
+              </div>
+            </div>
+            
+            <div class="fu-practice-feedback" id="practiceFeedback" style="display: none;">
+              <div class="fu-feedback-content" id="feedbackContent"></div>
+              <button class="fu-btn fu-btn-primary" id="nextPracticeQuestion">Next Question</button>
+            </div>
+            
+            <div class="fu-practice-results" id="practiceResults" style="display: none;">
+              <h3>Practice Results</h3>
+              <div class="fu-results-summary">
+                <div class="fu-result-item">
+                  <div class="fu-result-label">Score:</div>
+                  <div class="fu-result-value" id="practiceScoreDisplay">0%</div>
+                </div>
+                <div class="fu-result-item">
+                  <div class="fu-result-label">Correct Answers:</div>
+                  <div class="fu-result-value" id="practiceCorrectDisplay">0/0</div>
+                </div>
+              </div>
+              <button class="fu-btn fu-btn-primary" id="tryAnotherPractice">Try Another Set</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Assessments Page -->
+      <div class="fu-page" id="assessments-page">
+        <div class="fu-page-header">
+          <h1>Assessments</h1>
+          <p>Demonstrate your mastery and track your progress</p>
+        </div>
+        
+        <div class="fu-assessments-list">
+          <!-- Assessment cards will be generated here -->
+        </div>
+        
+        <div class="fu-quiz-system" style="display: none;">
+          <div class="fu-quiz-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" id="backToAssessmentsBtn">← Back to Assessments</button>
+            <h3 class="fu-quiz-title" id="quizTitle">Module Assessment: Fundraising Fundamentals</h3>
+            <div class="fu-quiz-progress">
+              <span>Question <span id="currentQuestionNum">1</span> of <span id="totalQuestions">15</span></span>
+              <div class="fu-progress-bar">
+                <div class="fu-progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+            <div class="fu-quiz-timer">Time Remaining: <span id="timerDisplay">30:00</span></div>
+          </div>
+          
+          <div class="fu-quiz-question" id="questionContainer">
+            <h4 id="questionText"></h4>
+            <div class="fu-options-list" id="optionsList">
+              <!-- Options will be inserted here -->
+            </div>
+          </div>
+          
+          <div class="fu-quiz-controls">
+            <button class="fu-btn fu-btn-secondary" id="prevQuestion">Previous</button>
+            <button class="fu-btn fu-btn-primary" id="nextQuestion">Next</button>
+            <button class="fu-btn fu-btn-success" id="submitQuiz">Submit Quiz</button>
+          </div>
+          
+          <div class="fu-quiz-results" id="quizResults" style="display: none;">
+            <h3>Assessment Results</h3>
+            <div class="fu-results-summary">
+              <div class="fu-result-item">
+                <div class="fu-result-label">Score:</div>
+                <div class="fu-result-value" id="scoreDisplay">85%</div>
+              </div>
+              <div class="fu-result-item">
+                <div class="fu-result-label">Correct Answers:</div>
+                <div class="fu-result-value" id="correctAnswersDisplay">13/15</div>
+              </div>
+              <div class="fu-result-status" id="passStatus">PASSED</div>
+            </div>
+            
+            <div class="fu-detailed-results" id="detailedResults">
+              <!-- Detailed results will go here -->
+            </div>
+            
+            <div class="fu-recommendation-section">
+              <h4>Recommended Focus Areas:</h4>
+              <ul id="recommendationsList">
+                <!-- Recommendations will go here -->
+              </ul>
+            </div>
+            
+            <div class="fu-results-actions">
+              <button class="fu-btn fu-btn-primary" id="reviewQuiz">Review Answers</button>
+              <button class="fu-btn fu-btn-success" id="continueBtn">Continue to Next Module</button>
+              <button class="fu-btn fu-btn-secondary" id="retakeBtn">Retake Assessment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Resources Page -->
+      <div class="fu-page" id="resources-page">
+        <div class="fu-page-header">
+          <h1>Resources</h1>
+          <p>Additional materials to support your fundraising education</p>
+        </div>
+        
+        <div class="fu-resources-grid">
+          <div class="fu-resource-card">
+            <div class="fu-resource-icon">📚</div>
+            <h3>Reading Library</h3>
+            <p>Essential books and articles on fundraising</p>
+            <button class="fu-btn fu-btn-primary" id="openLibraryBtn">View Library</button>
+          </div>
+          
+          <div class="fu-resource-card">
+            <div class="fu-resource-icon">🎬</div>
+            <h3>Video Lectures</h3>
+            <p>Expert lectures on key fundraising topics</p>
+            <button class="fu-btn fu-btn-primary" id="openVideosBtn">View Videos</button>
+          </div>
+          
+          <div class="fu-resource-card">
+            <div class="fu-resource-icon">📊</div>
+            <h3>Templates & Tools</h3>
+            <p>Practical resources for your fundraising journey</p>
+            <button class="fu-btn fu-btn-primary" id="openTemplatesBtn">Browse Tools</button>
+          </div>
+          
+          <div class="fu-resource-card">
+            <div class="fu-resource-icon">👥</div>
+            <h3>Community</h3>
+            <p>Connect with fellow fundraising students</p>
+            <button class="fu-btn fu-btn-primary" id="openCommunityBtn">Join Community</button>
+          </div>
+        </div>
+        
+        <!-- Resource Content Areas -->
+        <div class="fu-resource-content" id="libraryContent" style="display: none;">
+          <div class="fu-resource-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" data-return="resources">← Back to Resources</button>
+            <h2>Reading Library</h2>
+          </div>
+          <div class="fu-library-items">
+            <!-- Library items will be generated here -->
+          </div>
+        </div>
+        
+        <div class="fu-resource-content" id="videosContent" style="display: none;">
+          <div class="fu-resource-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" data-return="resources">← Back to Resources</button>
+            <h2>Video Lectures</h2>
+          </div>
+          <div class="fu-videos-grid">
+            <!-- Video items will be generated here -->
+          </div>
+        </div>
+        
+        <div class="fu-resource-content" id="templatesContent" style="display: none;">
+          <div class="fu-resource-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" data-return="resources">← Back to Resources</button>
+            <h2>Templates & Tools</h2>
+          </div>
+          <div class="fu-templates-grid">
+            <!-- Template items will be generated here -->
+          </div>
+        </div>
+        
+        <div class="fu-resource-content" id="communityContent" style="display: none;">
+          <div class="fu-resource-header">
+            <button class="fu-btn fu-btn-secondary fu-back-btn" data-return="resources">← Back to Resources</button>
+            <h2>Community</h2>
+          </div>
+          <div class="fu-community-content">
+            <!-- Community content will be generated here -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Certification Details Modal -->
+      <div class="fu-modal" id="certificationModal">
+        <div class="fu-modal-content">
+          <div class="fu-modal-header">
+            <h2>Fundraising PhD Certification</h2>
+            <button class="fu-modal-close" id="closeCertModal">&times;</button>
+          </div>
+          <div class="fu-modal-body">
+            <div class="fu-cert-info">
+              <h3>Requirements for Certification</h3>
+              <ul class="fu-cert-checklist">
+                <li>Complete all 6 modules with a score of 80% or higher</li>
+                <li>Pass the comprehensive final exam with a score of 85% or higher</li>
+                <li>Complete at least 120 hours of study time</li>
+                <li>Submit a final fundraising strategy document</li>
+              </ul>
+              
+              <h3>Benefits of Certification</h3>
+              <ul>
+                <li>Recognized credential in fundraising expertise</li>
+                <li>Access to exclusive alumni network</li>
+                <li>Lifetime access to updated course materials</li>
+                <li>Listing in our directory of certified fundraising experts</li>
+              </ul>
+              
+              <div class="fu-cert-progress">
+                <h3>Your Progress</h3>
+                <div class="fu-progress-bar">
+                  <div class="fu-progress-fill" id="certProgressFill" style="width: 25%"></div>
+                </div>
+                <p>You have completed <span id="certProgressText">25%</span> of certification requirements</p>
+              </div>
+            </div>
+          </div>
+          <div class="fu-modal-footer">
+            <button class="fu-btn fu-btn-secondary" id="closeCertBtn">Close</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Profile Settings Modal -->
+      <div class="fu-modal" id="profileModal">
+        <div class="fu-modal-content">
+          <div class="fu-modal-header">
+            <h2>Profile Settings</h2>
+            <button class="fu-modal-close" id="closeProfileModal">&times;</button>
+          </div>
+          <div class="fu-modal-body">
+            <div class="fu-profile-form">
+              <div class="fu-form-group">
+                <label for="profileName">Name</label>
+                <input type="text" id="profileName" class="fu-input" value="Student Name">
+              </div>
+              <div class="fu-form-group">
+                <label for="profileEmail">Email</label>
+                <input type="email" id="profileEmail" class="fu-input" value="student@example.com">
+              </div>
+              <div class="fu-form-group">
+                <label for="profileTimeZone">Time Zone</label>
+                <select id="profileTimeZone" class="fu-select">
+                  <option value="UTC-8">Pacific Time (UTC-8)</option>
+                  <option value="UTC-5">Eastern Time (UTC-5)</option>
+                  <option value="UTC+0">UTC</option>
+                  <option value="UTC+1">Central European Time (UTC+1)</option>
+                  <option value="UTC+8">China Standard Time (UTC+8)</option>
+                </select>
+              </div>
+              <div class="fu-form-group">
+                <label for="profileNotifications">Email Notifications</label>
+                <div class="fu-checkbox-group">
+                  <label><input type="checkbox" checked> Progress updates</label>
+                  <label><input type="checkbox" checked> Assessment reminders</label>
+                  <label><input type="checkbox" checked> New content alerts</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fu-modal-footer">
+            <button class="fu-btn fu-btn-secondary" id="closeProfileBtn">Cancel</button>
+            <button class="fu-btn fu-btn-primary" id="saveProfileBtn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <footer class="fu-footer">
+      <div class="fu-footer-content">
+        <p>&copy; 2023 Fundraising University. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
